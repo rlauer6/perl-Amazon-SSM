@@ -1,0 +1,198 @@
+package Amazon::SSM;
+
+use strict;
+use warnings;
+
+use parent qw/Amazon::API/;
+
+=pod
+
+=head1 NAME
+
+C<Amazon::SSM>
+
+=head1 SYNOPSIS
+
+ use strict;
+ use warnings;
+ 
+ use Amazon::SSM;
+ use JSON qw/from_json/;
+ 
+ my $ssm = new Amazon::SSM();
+ 
+ my $result = from_json $ssm->get_parameter({Name => '/site/env', WithDecryption => JSON::true} );
+ 
+ print $result->{Parameter}->{Value};
+
+=head1 DESCRIPTION
+
+Interface to Amazon's SSM API.
+
+=head1 METHODS
+
+See the Amazon SSM API documentation for method
+arguments. L</http://docs.aws.amazon.com/systems-manager/latest/APIReference/Welcome.html>
+
+=head2 new
+
+ new( options )
+
+=over 5
+
+=item region
+
+AWS region.  default: us-east-1
+
+=item credentials
+
+An C<Amazon::Credentials> object.  You can specify your credentials
+using this object or by setting your access keys and optional token
+directly.
+
+=item aws_secret_access_key
+
+Your AWS secret access key.
+
+=item aws_access_key_id
+
+Your AWS access key id.
+
+=item token
+
+Optional token if your credentials were temporary (from the role or assumed role).
+
+=back
+
+I<Note: If no credentials are passed to the constructor, the API will
+instanstiate an C<Amazon::Credentials> object which will attempt to
+locate them.>
+
+=cut
+
+my @API_METHODS = qw/AddTagsToResource
+		     CancelCommand
+		     CreateActivation
+		     CreateAssociation
+		     CreateAssociationBatch
+		     CreateDocument
+		     CreateMaintenanceWindow
+		     CreatePatchBaseline
+		     CreateResourceDataSync
+		     DeleteActivation
+		     DeleteAssociation
+		     DeleteDocument
+		     DeleteMaintenanceWindow
+		     DeleteParameter
+		     DeleteParameters
+		     DeletePatchBaseline
+		     DeleteResourceDataSync
+		     DeregisterManagedInstance
+		     DeregisterPatchBaselineForPatchGroup
+		     DeregisterTargetFromMaintenanceWindow
+		     DeregisterTaskFromMaintenanceWindow
+		     DescribeActivations
+		     DescribeAssociation
+		     DescribeAutomationExecutions
+		     DescribeAutomationStepExecutions
+		     DescribeAvailablePatches
+		     DescribeDocument
+		     DescribeDocumentPermission
+		     DescribeEffectiveInstanceAssociations
+		     DescribeEffectivePatchesForPatchBaseline
+		     DescribeInstanceAssociationsStatus
+		     DescribeInstanceInformation
+		     DescribeInstancePatches
+		     DescribeInstancePatchStates
+		     DescribeInstancePatchStatesForPatchGroup
+		     DescribeMaintenanceWindowExecutions
+		     DescribeMaintenanceWindowExecutionTaskInvocations
+		     DescribeMaintenanceWindowExecutionTasks
+		     DescribeMaintenanceWindows
+		     DescribeMaintenanceWindowTargets
+		     DescribeMaintenanceWindowTasks
+		     DescribeParameters
+		     DescribePatchBaselines
+		     DescribePatchGroups
+		     DescribePatchGroupState
+		     GetAutomationExecution
+		     GetCommandInvocation
+		     GetDefaultPatchBaseline
+		     GetDeployablePatchSnapshotForInstance
+		     GetDocument
+		     GetInventory
+		     GetInventorySchema
+		     GetMaintenanceWindow
+		     GetMaintenanceWindowExecution
+		     GetMaintenanceWindowExecutionTask
+		     GetMaintenanceWindowExecutionTaskInvocation
+		     GetMaintenanceWindowTask
+		     GetParameter
+		     GetParameterHistory
+		     GetParameters
+		     GetParametersByPath
+		     GetPatchBaseline
+		     GetPatchBaselineForPatchGroup
+		     ListAssociations
+		     ListAssociationVersions
+		     ListCommandInvocations
+		     ListCommands
+		     ListComplianceItems
+		     ListComplianceSummaries
+		     ListDocuments
+		     ListDocumentVersions
+		     ListInventoryEntries
+		     ListResourceComplianceSummaries
+		     ListResourceDataSync
+		     ListTagsForResource
+		     ModifyDocumentPermission
+		     PutComplianceItems
+		     PutInventory
+		     PutParameter
+		     RegisterDefaultPatchBaseline
+		     RegisterPatchBaselineForPatchGroup
+		     RegisterTargetWithMaintenanceWindow
+		     RegisterTaskWithMaintenanceWindow
+		     RemoveTagsFromResource
+		     SendAutomationSignal
+		     SendCommand
+		     StartAutomationExecution
+		     StopAutomationExecution
+		     UpdateAssociation
+		     UpdateAssociationStatus
+		     UpdateDocument
+		     UpdateDocumentDefaultVersion
+		     UpdateMaintenanceWindow
+		     UpdateMaintenanceWindowTarget
+		     UpdateMaintenanceWindowTask
+		     UpdateManagedInstanceRole
+		     UpdatePatchBaseline		      
+		    /;
+
+sub new {
+  my $class = shift;
+  my $options = shift || {};
+
+  $class->SUPER::new({
+		      %$options,
+		      service_url_base => 'ssm',
+		      version          => undef,
+		      api              => 'AmazonSSM',
+		      api_methods      => \@API_METHODS,
+		      content_type     => 'application/x-amz-json-1.1'
+		     });
+}
+
+=pod
+
+=head1 AUTHOR
+
+Rob Lauer - <rlauer6@comcast.net>
+
+=head1 SEE ALSO
+
+C<Amazon::API>, C<Amazon::Credentials>
+
+=cut
+
+1;
