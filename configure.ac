@@ -76,8 +76,6 @@ do_subst_command='do_subst = sed \
   -e '"'"'s,[@]apache_imgdir[@],$(apache_imgdir),g'"'"' \
   -e '"'"'s,[@]apache_scriptdir[@],$(apache_scriptdir),g'"'"' \
   -e '"'"'s,[@]apache_virtual[@],$(apache_virtual),g'"'"' \
-\
-  -e '"'"'s,[@]SOME_THINGY[@],$(SOME_THINGY),g'"'"' \
 '
 ]
 
@@ -158,7 +156,6 @@ printf "           Configuration files: %s\n" "`__poor_mans_expand_file_name sys
 printf "                  Manual pages: %s\n" "`__poor_mans_expand_file_name mandir`"
 printf "\n"
 printf "                   perl5libdir: %s\n" "`__poor_mans_expand_file_name perl5libdir`"
-printf "            Enable some thingy: %s\n" "`__poor_mans_expand_file_name SOME_THINGY_ENABLED`"
 printf "\n"
 printf "                          perl: %s\n" "`__poor_mans_expand_file_name PERL`"
 printf "                          bash: %s\n" "`__poor_mans_expand_file_name BASHRUN`"
