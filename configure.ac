@@ -88,9 +88,6 @@ AC_CONFIG_MACRO_DIR([autotools])
 
 AM_INIT_AUTOMAKE([-Wall -Werror foreign tar-ustar])
 
-dnl --enable-rpm-build-mode
-RPM_BUILD_MODE
-
 AC_PATH_PROG([BASHRUN],
 	[bash])
 
@@ -128,15 +125,12 @@ AC_ARG_WITH(
 
 AC_SUBST([perl5libdir])
 
+
 dnl something just to make autoconf include the autotools/ads_ stuff in the distribution
 ads_PERL_MODULE([Getopt::Long])
 
 dnl example using the PERL_MODULE check with a version number
 dnl ads_PERL_MODULE([CJ::Log], [REQUIRED], [1.3])
-
-dnl example macro that enables allows you to enable/disable some feature
-dnl --enable-some-thingy, --disable-some-thingy : see the autotools/ax_am_conditional_example.m4 macro
-AX_SOME_THINGY
 
 AX_DISTCHECK_HACK
 AX_DEPS_CHECK

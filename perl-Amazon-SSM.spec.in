@@ -6,7 +6,7 @@
 Name:       %{project_base}
 Version:    %(echo @VERSION@ | awk -F- '{print $1}')
 Release:    %(echo @VERSION@ | awk -F- '{if (length($2) == 0) {print "0" } else { print $2 } }')
-License:    Artistic
+License:    Artistic License
 Vendor:     None
 Source:     %{project_base}-%{project_version}.tar.gz
 
@@ -47,7 +47,9 @@ Group:    Development/Tools
 %build
 ./configure --prefix=/usr \
 	    --with-perl5libdir \
-            --enable-rpmbuild
+            --enable-rpmbuild \
+	    --disable-perldeps
+			     
 make
 
 # Pre-installation steps go here
