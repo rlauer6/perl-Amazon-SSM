@@ -1,4 +1,10 @@
 **/Makefile
+**/Makefile.in
+autom4te.cache/
+autotools/missing
+autotools/install-sh
+autotools/test-driver
+configure
 config.log
 config.status
 *.tar.gz
